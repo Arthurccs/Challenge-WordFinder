@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Models.Core;
 using Services.Helpers;
@@ -35,22 +36,30 @@ namespace Services.Core
         public IEnumerable<string> Find(IEnumerable<string> wordStream)
         {
             //clean stream
-            wordStream = wordStream.Distinct();
-
-            //check matrix rows 
-            _matrix.ToList().ForEach(rowWord =>
+            try
             {
-                _finderHelper.FindWord(rowWord, wordStream, ref _foundWords);
-            });
+                wordStream = wordStream.Distinct();
 
-            //check matrix columns
-            for(int i = 0; i < _matrixSize; i++)
-            {
-                if (i < _matrixSize)
+                //check matrix rows 
+                _matrix.ToList().ForEach(rowWord =>
                 {
-                    string columnWord = _finderHelper.GetColumnWord(i,_matrix).ToLower();
-                    _finderHelper.FindWord(columnWord, wordStream, ref _foundWords);
+                    _finderHelper.FindWord(rowWord, wordStream, ref _foundWords);
+                });
+
+                //check matrix columns
+                for(int i = 0; i < _matrixSize; i++)
+                {
+                    if (i < _matrixSize)
+                    {
+                        string columnWord = _finderHelper.GetColumnWord(i,_matrix).ToLower();
+                        _finderHelper.FindWord(columnWord, wordStream, ref _foundWords);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Matrix Size incorrect");
+                return null;
             }
 
             var result = from f in _foundWords orderby f.Repeat descending select f.StringValue;

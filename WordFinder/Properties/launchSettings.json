@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WordFinder": {
+      "commandName": "Project",
+      "commandLineArgs": "abcdc,fgwio,chill,pqnsd,uvdxy chill,chill,c"
+    }
+  }
+}

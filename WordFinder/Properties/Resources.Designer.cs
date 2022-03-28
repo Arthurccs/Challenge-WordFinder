@@ -59,5 +59,14 @@ namespace WordFinder.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No input data..
+        /// </summary>
+        internal static string WordSearch_Main_No_input_data_ {
+            get {
+                return ResourceManager.GetString("WordSearch_Main_No_input_data_", resourceCulture);
+            }
+        }
     }
 }

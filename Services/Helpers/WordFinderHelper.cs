@@ -52,6 +52,19 @@ namespace Services.Helpers
             });
         }
 
+        /// <inheritdoc />
+        public string GetColumnWord(int columnIndex, IEnumerable<string> matrix)
+        {
+            var word = string.Empty;
+            var enumerable = matrix as string[] ?? matrix.ToArray();
+            for (int i = 0; i < enumerable.FirstOrDefault()!.Length; i++)
+            {
+                word += enumerable.ToList()[i][columnIndex];
+            }
+
+            return word;
+        }
+
         #endregion
 
     }

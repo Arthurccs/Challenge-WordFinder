@@ -19,6 +19,17 @@ namespace Services.Helpers
         /// <param name="foundWords">the foundWords list </param>
         public void FindWord(string word, IEnumerable<string> wordstream, ref List<Word> foundWords);
 
+        /// <summary>
+        /// const value to show max results
+        /// </summary>
         public const int MaxResult = 10;
+
+        /// <summary>
+        /// Method to get the column word from a respective position of the matrix
+        /// </summary>
+        /// <param name="columnIndex">index that represent the column to take</param>
+        /// <param name="matrix">the matrix</param>
+        /// <returns></returns>
+        public string GetColumnWord(int columnIndex, IEnumerable<string> matrix);
     }
 }

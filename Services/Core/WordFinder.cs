@@ -12,6 +12,7 @@ namespace Services.Core
         private IEnumerable<string> _matrix;
         private IWordFinderHelper _finderHelper;
         private List<Word> _foundWords;
+        private int _matrixSize;
 
 
         #endregion
@@ -23,6 +24,7 @@ namespace Services.Core
             _matrix = matrix;
             _finderHelper = new WordFinderHelper();
             _foundWords = new List<Word>();
+            _matrixSize = _matrix.FirstOrDefault()!.Length;
         }
 
         #endregion
@@ -36,10 +38,20 @@ namespace Services.Core
             wordStream = wordStream.Distinct();
 
             //check matrix rows 
-            _matrix.ToList().ForEach(row =>
+            _matrix.ToList().ForEach(rowWord =>
             {
-                _finderHelper.FindWord(row, wordStream, ref _foundWords);
+                _finderHelper.FindWord(rowWord, wordStream, ref _foundWords);
             });
+
+            //check matrix columns
+            for(int i = 0; i < _matrixSize; i++)
+            {
+                if (i < _matrixSize)
+                {
+                    string columnWord = _finderHelper.GetColumnWord(i,_matrix).ToLower();
+                    _finderHelper.FindWord(columnWord, wordStream, ref _foundWords);
+                }
+            }
 
             var result = from f in _foundWords orderby f.Repeat descending select f.StringValue;
             return result.Take(IWordFinderHelper.MaxResult);

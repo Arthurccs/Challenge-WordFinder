@@ -2,7 +2,7 @@
   "profiles": {
     "WordFinder": {
       "commandName": "Project",
-      "commandLineArgs": "abcdc,fgwio,chill,pqnsd,uvdxy chill,chill,c"
+      "commandLineArgs": "adcdc,fgwio,chill,pqnsd,uvdxy a,c,i,d,b,f,p,u,h,w,q,g,l,dc"
     }
   }
 }
